@@ -1,0 +1,73 @@
+<div class="employee-list-container">
+
+    <h2>Employee List</h2>
+
+    <button class="button" type="button" (click)="onClickAddNew()">Add New Employee</button>
+    <button class="button" type="button" (click)="onClickDeleteSelected()">Delete Selected</button>
+
+    <fieldset *ngIf="showAddForm" class="new-employee-container">
+        <legend>Add New Employee</legend>
+        <div class="form-container">
+            <div class="form">
+                <label>Name:</label>
+                <div class="form-input">
+                    <input type="text" [(ngModel)]="blankEmployee.name">
+                </div>
+            </div>
+            <div class="form">
+                <label>Email:</label>
+                <div class="form-input">
+                    <input type="text" [(ngModel)]="blankEmployee.email">
+                </div>
+            </div>
+            <div class="form">
+                <label>Phone:</label>
+                <div class="form-input">
+                    <input type="text" [(ngModel)]="blankEmployee.phone">
+                </div>
+            </div>
+            <div class="form">
+                <label>Address:</label>
+                <div class="form-input">
+                    <input type="text" [(ngModel)]="blankEmployee.address">
+                </div>
+            </div>
+            <div>
+                <button class="button" type="button" (click)="onAdd()">Add</button>
+                <button class="button" type="button" (click)="onCancel()">Cancel</button>
+            </div>
+        </div>
+    </fieldset>
+
+    <table id="employees">
+        <thead>
+        <tr>
+            <th>
+                <input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="toggleAll()">
+            </th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let emp of employees">
+            <td>
+                <input type="checkbox" [(ngModel)]="emp.selected"/>
+            </td>
+            <td>{{ emp.id }}</td>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.email }}</td>
+            <td>{{ emp.phone }}</td>
+            <td>{{ emp.address }}</td>
+            <td>
+                <button type="button" (click)="onClickDelete(emp.id)">Delete</button>
+            </td>
+        </tr>
+        <tr class="no-data" *ngIf="employees.length === 0">No data available</tr>
+        </tbody>
+    </table>
+</div>
